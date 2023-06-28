@@ -93,9 +93,11 @@ public class FsWatcher extends Plugin {
         }
 
         // Uri dir = Uri.fromFile(new File(mPath));
-        Uri dir = getContentResolver().openInputStream(new File(mPath)).getUri();
+        // Uri dir = getContentResolver().openInputStream(new File(mPath)).getUri();
+        Uri dir = Uri.parse(mPath);
         // Uri fpath = Uri.fromFile(f);
-        Uri fpath = getContentResolver().openInputStream(f).getUri();
+        // Uri fpath = getContentResolver().openInputStream(f).getUri();
+        Uri fpath = Uri.parse(f);
         String relpath = null;
 
         if (fpath.getPath().startsWith(dir.getPath())) {
@@ -112,7 +114,8 @@ public class FsWatcher extends Plugin {
 
         obj.put("path", Normalizer.normalize(relpath, Normalizer.Form.NFC));
         // obj.put("dir", Uri.fromFile(new File(mPath))); // Uri is for Android. URI is for RFC compatible
-        obj.put("dir", getContentResolver().openInputStream(new File(mPath)).getUri()); // Uri is for Android. URI is for RFC compatible
+        // obj.put("dir", getContentResolver().openInputStream(new File(mPath)).getUri()); // Uri is for Android. URI is for RFC compatible
+        obj.put("dir", Uri.parse(mPath)); // Uri is for Android. URI is for RFC compatible
         JSObject stat;
 
         switch (event) {
