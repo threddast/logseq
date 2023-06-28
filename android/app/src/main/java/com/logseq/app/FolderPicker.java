@@ -65,7 +65,8 @@ public class FolderPicker extends Plugin {
         if (path == null || path.isEmpty()) {
             call.reject("Cannot support this directory type: " + docUri);
         } else {
-            Uri folderUri = Uri.fromFile(new File(path));
+            // Uri folderUri = Uri.fromFile(new File(path));
+            Uri folderUri = getContentResolver().openInputStream(new File(path)).getUri();
             ret.put("path", folderUri.toString());
             call.resolve(ret);
         }
